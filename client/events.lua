@@ -2,7 +2,7 @@ RegisterNUICallback("data_status", function(data)
     if soundInfo[data.id] ~= nil then
         if data.type == "finished" then
             soundInfo[data.id].playing = false
-            TriggerEvent("xSound:songStopPlaying", data.id)
+            TriggerEvent("glxsound:songStopPlaying", data.id)
         end
         if data.type == "maxDuration" then
             soundInfo[data.id].maxDuration = data.time
@@ -31,8 +31,8 @@ RegisterNUICallback("events", function(data)
     end
 end)
 
-RegisterNetEvent("xsound:stateSound")
-AddEventHandler("xsound:stateSound", function(state, data)
+RegisterNetEvent("glxsound:stateSound")
+AddEventHandler("glxsound:stateSound", function(state, data)
     local soundId = data.soundId
 
     if state == "timestamp" then
@@ -42,11 +42,15 @@ AddEventHandler("xsound:stateSound", function(state, data)
     end
 
     if state == "texttospeech" then
-        TextToSpeech(soundId, data.lang, data.url, data.volume, data.loop or false)
+        TextToSpeech(soundId, data.lang, data.text, data.volume, data.loop or false)
     end
 
     if state == "texttospeechpos" then
-        TextToSpeechPos(soundId, data.lang, data.url, data.volume, data.position, data.loop or false)
+        TextToSpeechPos(soundId, data.lang, data.text, data.volume, data.position, data.loop or false)
+    end
+    
+    if state == "texttospeechentity" then
+        TextToSpeechEntity(soundId, data.lang, data.text, data.nt, data.volume, data.loop or false)
     end
 
     if state == "play" then
@@ -55,6 +59,10 @@ AddEventHandler("xsound:stateSound", function(state, data)
 
     if state == "playpos" then
         PlayUrlPos(soundId, data.url, data.volume, data.position, data.loop or false)
+    end
+    
+    if state == "playentity" then
+        PlayUrlEntity(soundId, data.url, data.volume, data.nt, data.loop or false)
     end
 
     if state == "position" then
