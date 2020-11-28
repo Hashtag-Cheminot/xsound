@@ -312,3 +312,6 @@ Showcase what I did with my API
 https://www.youtube.com/watch?v=OOf6PZFpfkI
 
 https://www.youtube.com/watch?v=JRTVga_FwGw
+
+##
+Customization: Add play on entity (url & tts) with network id of entity
