@@ -204,6 +204,7 @@ class SoundPlayer
 	{
 	    if(this.audioPlayer != null){
             this.audioPlayer.pause();
+            this.audioPlayer.unload();
             this.audioPlayer = null;
 	    }
 	    $("#" + this.div_id).remove();
